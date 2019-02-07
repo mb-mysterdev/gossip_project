@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>THE_Yannick_Momo_Polo_Project</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <span class="nav-item nav-link active"> <%= link_to "Accueil", gossips_path %> </span>
+      <span class="nav-item nav-link active"> <%= link_to "Equipe", welcome_team_path %> </span>
+      <span class="nav-item nav-link active"> <%= link_to "Contact", welcome_contact_path %> </span>
+      <% if User.find_by(id: session[:user_id]) %>
+        <%= link_to "Se déconnecter", session_path(session[:user_id]), class: "btn btn-secondary", method: "DELETE"  %>
+      <% else %>
+        <div class="dropdown">
+          <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            S'identifier
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <%= link_to "S'inscrire", new_user_path, class: "dropdown-item" %>
+            <%= link_to "Se connecter", root_path, class: "dropdown-item" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</nav>
+<div class="container">
+  <% flash.each do |key, value| %>
+    <div class="<%= flash_class(key) %>">
+      <%= value %>
+    </div>
+  <% end %>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+      <%= yield %>
+  </body>
+</html>

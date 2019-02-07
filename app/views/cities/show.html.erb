@@ -1,0 +1,18 @@
+<h1>Voici les rumeurs de la ville de <%= City.find(params[:id]).name %></h1>
+
+<div id="conteneur_card">
+  <% Gossip.all.each.with_index do |gossip, index| %>
+  <% if gossip.user.city.name == City.find(params[:id]).name %>
+  <div class="card" style="width: 13rem;">
+    <div class="card-body">
+      <h5 class="card-title">Titre: <%= gossip.title %></h5>
+      <p class="card-text">Auteur: <%= gossip.user.first_name %></p>
+      <div id="conteneur_link">
+        <%= link_to "Voir le détail", gossip_path(gossip.id), class: "card-link" %>
+        <%= link_to "Voir l'auteur", user_path(gossip.user_id), class: "card-link" %>
+      </div>
+    </div>
+  </div>   
+  <% end %>
+  <% end %>
+</div>

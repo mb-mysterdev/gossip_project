@@ -1,0 +1,27 @@
+<h1>Bienvenue <%= session[:first_name] %> </h1>
+<div id="conteneur_btn">
+<p>Voici la liste des rumeurs:</p>
+<% if User.find_by(id: session[:user_id]) %>
+  <%=  link_to "Créer une nouvelle rumeur", new_gossip_path, class: "btn btn-primary"%>
+<% end %>
+</div>
+
+<div id="conteneur_card">
+  <% Gossip.all.each.with_index do |gossip, index| %>
+  <div class="card" style="width: 13rem;">
+    <div class="card-body">
+      <h5 class="card-title">Titre: <%= gossip.title %></h5>
+      <p class="card-text">Auteur: <%= gossip.user.first_name %></p>
+      <p class="card-text">Commentaires: <%= Comment.where(gossip_id: gossip.id).count %></p>
+      <div id="conteneur_link">
+        <%= link_to "Voir le détail", gossip_path(gossip.id), class: "card-link" %>
+        <%= link_to "Voir l'auteur", user_path(gossip.user_id), class: "card-link" %>
+        <% if User.find_by(id: session[:user_id]) && gossip.user_id == User.find_by(id: session[:user_id]).id %>
+          <%= link_to "Modifier", edit_gossip_path(gossip.id), class: "card-link" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <% end %> 
+</div>
+

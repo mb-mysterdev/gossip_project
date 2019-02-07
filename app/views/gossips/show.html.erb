@@ -1,0 +1,39 @@
+<h1>Détail de la rumeur</h1>
+<h2>Auteur: <%= Gossip.find(params[:id]).user.first_name %> <%= Gossip.find(params[:id]).user.last_name %> </h2>
+<h2>Titre: <%= Gossip.find(params[:id]).title %> </h2>
+<h2>Contenu: <%= Gossip.find(params[:id]).content %> </h2>
+<h2>Date: <%= Gossip.find(params[:id]).created_at %> </h2>
+<%= link_to "Profil de l'auteur", user_path(Gossip.find(params[:id]).user_id) , class: "btn btn-primary" %>
+<%= link_to "Voir la ville de l'auteur", city_path(Gossip.find(params[:id]).user.city_id), class: "btn btn-primary" %>
+<% if User.find_by(id: session[:user_id]) && Gossip.find(params[:id]).user_id == User.find_by(id: session[:user_id]).id %>
+  <%= link_to "Supprimer la rumeur", gossip_path(Gossip.find(params[:id]).id), class: "btn btn-danger", method: "DELETE"  %>
+<% end %>
+
+<h2>Commentaires:</h2>
+<% Comment.all.each do |comment| %>
+  <% if comment.gossip_id == Gossip.find(params[:id]).id %>
+    <p> <%= "#{comment.user.first_name}:" %> </p>
+    <p> <%= comment.content %> </p>
+    <% if User.find_by(id: session[:user_id]) && comment.user_id == User.find_by(id: session[:user_id]).id %>
+      <p>Mettre à jour le commentaire</p>
+      <form action=  <%= gossip_comment_path(Gossip.find(params[:id]).id, comment.id) %> method="POST">
+        <input type="hidden" name="authenticity_token" value=<%= form_authenticity_token %> >
+        <input type="hidden" name="_method" value="put" />
+        <input type="hidden" name="id" value=<%= comment.id %> >
+        <input type="text" name="content">
+        <input type="submit" value="Valider">
+      </form>
+    <%= link_to "Supprimer le commentaire", gossip_comment_path(Gossip.find(params[:id]).id, comment.id), class: "btn btn-danger", method: "DELETE"  %>
+  <% end %>
+  <% end %>
+<% end %>
+
+<% if User.find_by(id: session[:user_id]) %>
+  <h2>Ajout d'un commentaire</h2>
+  <form action=  <%= gossip_comments_path(Gossip.find(params[:id]).id) %> method="POST">
+    <input type="hidden" name="authenticity_token" value=<%= form_authenticity_token %> >
+    <input type="hidden" name="gossip_id" value=<%= Gossip.find(params[:id]).id %> >
+    <input type="text" name="content">
+    <input type="submit" value="Valider">
+  </form>
+<% end %>

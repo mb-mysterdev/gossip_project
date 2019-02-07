@@ -1,0 +1,10 @@
+<h1>Détail sur l'auteur de la rumeur</h1>
+<h2>Prénom: <%= User.find(params[:id]).first_name %> </h2>
+<h2>Nom: <%= User.find(params[:id]).last_name %> </h2>
+<h2>Description: <%= User.find(params[:id]).description %> </h2>
+<h2>Email: <%= User.find(params[:id]).email %> </h2>
+<h2>Age: <%= User.find(params[:id]).age %> </h2>
+<h2>Ville: <%= User.find(params[:id]).city.name %> </h2>
+<h2>Date: <%= User.find(params[:id]).created_at %> </h2>
+<%= link_to "Voir la ville de l'auteur", city_path(User.find(params[:id]).city_id), class: "btn btn-primary" %>
+

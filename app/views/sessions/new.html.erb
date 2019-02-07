@@ -1,0 +1,106 @@
+<center><h1>Bienvenue sur ce site référençant des rumeurs</h1>
+<br><br><br><p>Veuillez saisir votre courriel et votre mot de passe</p>
+
+<%= form_tag url_for(action: 'create'), method: "post" do %>
+    <div class="form_f">
+    <label>Votre email </label>
+      <%= text_field_tag 'email' %>
+          <label class="pass">Votre password </label>
+      <%= password_field_tag 'password' %>
+      <br>
+      <%= submit_tag "Valider" %>
+      </div>
+<% end %>
+
+<%= link_to "Accéder au site sans se connecter", gossips_path, class: "btn btn-primary" %>
+<%= link_to "Créer un compte utilisateur", new_user_path, id: 'sign_up' , class: "btn btn-primary" %>
+
+<% flash.each do |key, value| %>
+    <div class="<%= flash_class(key) %>">
+      <%= value %>
+    </div>
+<% end %>
+</center>
+
+
+<style>
+
+.form_f
+{
+  box-shadow : #e4c5c552 0px 0px 38px 0px;
+  width : 20rem;
+  padding-top : 50px;
+    padding-bottom : 50px;
+    border-radius : 9.9px;
+  margin-bottom : 50px;
+}
+
+#sign_up {
+    height : 1.5rem;
+    background-color : #afa0de52 ;
+}
+
+#sign_up:hover {
+        background-color : #81abea ;
+
+}
+body {
+  background-image : linear-gradient(#FC5C7D,#6A82FB);
+  background-size : cover;
+  background-repeat : no-repeat;
+  background-attachment : fixed;
+  color: white;
+  font-family: sans-serif;
+}
+
+h2 {
+  color: #ece2e2;
+  font-size: 25px;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+a {
+  text-decoration: none;
+}
+
+.login {
+  width: 250px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -184px 0px 0px -155px;
+  background: rgba(0,0,0,0.2);
+  padding: 20px 30px;
+  border-radius: 5px;
+  box-shadow: 0px 1px 0px rgba(0,0,0,0.3),inset 0px 1px 0px rgba(255,255,255,0.07)
+}
+
+input[type="text"], input[type="password"] {
+    display : inherit;
+  margin-bottom : 10px;
+
+  width: 250px;
+  padding: 15px 0px;
+  background: #dac3c32e;
+  border: 0;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  outline: none;
+  color : white;
+  margin-top : 20px;
+}
+
+input[type="submit"] {
+  background: #fd537e;
+  border: 0;
+  width: 190px;
+  height: 40px;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+  color : white;
+}
+
+
+</style>

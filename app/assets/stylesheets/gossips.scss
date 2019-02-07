@@ -1,0 +1,30 @@
+// Place all the styles related to the gossips controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+#conteneur_btn {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+#conteneur_card {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+#conteneur_link {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.card {
+  margin: 5px;
+}
+
+h1, p {
+  margin: 5px;
+}

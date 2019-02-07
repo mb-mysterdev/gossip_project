@@ -4,10 +4,12 @@ Step to run the webapp on a local server (url: http://localhost:3000/)
 
 * Git clone the repository
 
-* Rails db:migrate
+* Rails db:create bobobobobo
 
-* Rails db:seed
+* Rails db:migrate bobobobo
 
-* Rails server
+* Rails db:seed bobobobo
+
+* Rails server bobobobo
 
 * Launch your web browser on http://localhost:3000/
